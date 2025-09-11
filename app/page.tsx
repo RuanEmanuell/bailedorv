@@ -1,103 +1,117 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useState } from "react";
+
+const eventDate = new Date("2025-12-12T00:00:00");
+
+function getCountdown() {
+  const now = new Date();
+  const diff = eventDate.getTime() - now.getTime();
+  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+  return { days, hours, minutes, seconds };
+}
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [countdown, setCountdown] = useState(getCountdown());
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(getCountdown());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
+      style={{
+        backgroundImage: "url('/imagem.jpeg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Overlay for synthwave effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1a0033cc] via-[#2a0055bb] to-[#000a] z-0" />
+
+      {/* Conteúdo principal */}
+      <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center px-4 py-8 sm:py-16">
+        {/* Título neon */}
+        <h1 className="text-4xl sm:text-6xl font-extrabold text-center mb-6 tracking-wide">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-purple-600 drop-shadow-[0_0_16px_rgba(128,0,255,0.8)]">
+            BAILE DO
+          </span>
+          <span className="block text-red-500 text-6xl sm:text-8xl mt-2 drop-shadow-[0_0_24px_rgba(255,0,80,0.8)]">
+            R.V.
+          </span>
+        </h1>
+
+        {/* Contagem regressiva */}
+        <div className="flex flex-col items-center mb-8">
+          <span className="text-lg sm:text-2xl font-mono text-white/90 mb-2 tracking-widest drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">
+            A festa começa em:
+          </span>
+          <div className="flex gap-4 text-2xl sm:text-4xl font-bold text-neon-pink">
+            <span className="countdown-box">{countdown.days}d</span>
+            <span className="countdown-box">{countdown.hours}h</span>
+            <span className="countdown-box">{countdown.minutes}m</span>
+            <span className="countdown-box">{countdown.seconds}s</span>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Regras neon */}
+        <div className="bg-black/40 rounded-xl p-6 backdrop-blur-md border border-pink-500/30 shadow-lg mb-8 w-full max-w-lg">
+          <ul className="space-y-3 text-center text-base sm:text-lg font-semibold">
+            <li className="text-neon-blue drop-shadow-[0_0_8px_rgba(80,0,255,0.7)]">LOCAL SECRETO: O endereço não é divulgado publicamente.</li>
+            <li className="text-neon-pink drop-shadow-[0_0_8px_rgba(255,0,180,0.7)]">APENAS 40 CONVIDADOS: Evento extremamente limitado e íntimo.</li>
+            <li className="text-neon-yellow drop-shadow-[0_0_8px_rgba(255,255,80,0.7)]">CELULARES PROIBIDOS: Privacidade e imersão garantidas.</li>
+            <li className="text-neon-green drop-shadow-[0_0_8px_rgba(0,255,128,0.7)]">CONVIDADO NÃO CONVIDA: Só entra quem está na lista.</li>
+          </ul>
+        </div>
+
+        {/* Silhueta fictícia (opcional: pode ser SVG ou imagem extra) */}
+        {/* <img src="/silhueta.png" alt="Silhueta" className="w-48 mb-8" /> */}
+      </div>
+
+      {/* Selo VIP neon */}
+      <div className="absolute left-4 bottom-4 z-20">
+        <div className="w-20 h-20 rounded-full flex items-center justify-center bg-pink-500/80 border-4 border-pink-400 shadow-[0_0_32px_#ff00cc] animate-pulse">
+          <span className="flex flex-col items-center justify-center text-white font-bold text-xs sm:text-base tracking-widest drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] h-full w-full text-center leading-tight">
+            <span className="block">VIP</span>
+            <span className="block">INVITE</span>
+            <span className="block">ONLY</span>
+          </span>
+        </div>
+      </div>
+
+      {/* Responsividade extra para mobile */}
+      <style jsx>{`
+        .countdown-box {
+          background: linear-gradient(90deg, #ff00cc 0%, #3333ff 100%);
+          color: #fff;
+          padding: 0.5em 1em;
+          border-radius: 0.5em;
+          box-shadow: 0 0 12px #ff00cc88;
+        }
+        .text-neon-blue {
+          color: #7f7fff;
+          text-shadow: 0 0 8px #7f7fff88;
+        }
+        .text-neon-pink {
+          color: #ff00cc;
+          text-shadow: 0 0 8px #ff00cc88;
+        }
+        .text-neon-yellow {
+          color: #ffff80;
+          text-shadow: 0 0 8px #ffff8088;
+        }
+        .text-neon-green {
+          color: #00ff80;
+          text-shadow: 0 0 8px #00ff8088;
+        }
+      `}</style>
     </div>
   );
 }

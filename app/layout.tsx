@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Baile do R.V.",
-  description: "Evento secreto, exclusivo e misterioso. Apenas para convidados VIP. 12/12/2025.",
+  description: "12/12/2025.",
 };
 
 export default function RootLayout({

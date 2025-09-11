@@ -64,10 +64,10 @@ export default function Home() {
         {/* Regras neon */}
         <div className="bg-black/40 rounded-xl p-6 backdrop-blur-md border border-pink-500/30 shadow-lg mb-8 w-full max-w-lg">
           <ul className="space-y-3 text-center text-base sm:text-lg font-semibold">
-            <li className="text-neon-blue drop-shadow-[0_0_8px_rgba(80,0,255,0.7)]">LOCAL SECRETO: O endereço não é divulgado publicamente.</li>
-            <li className="text-neon-pink drop-shadow-[0_0_8px_rgba(255,0,180,0.7)]">APENAS 40 CONVIDADOS: Evento extremamente limitado e íntimo.</li>
-            <li className="text-neon-yellow drop-shadow-[0_0_8px_rgba(255,255,80,0.7)]">CELULARES PROIBIDOS: Privacidade e imersão garantidas.</li>
-            <li className="text-neon-green drop-shadow-[0_0_8px_rgba(0,255,128,0.7)]">CONVIDADO NÃO CONVIDA: Só entra quem está na lista.</li>
+            <li className="text-neon-blue drop-shadow-[0_0_8px_rgba(80,0,255,0.7)]">LOCAL SECRETO</li>
+            <li className="text-neon-pink drop-shadow-[0_0_8px_rgba(255,0,180,0.7)]">APENAS 40 CONVIDADOS</li>
+            <li className="text-neon-yellow drop-shadow-[0_0_8px_rgba(255,255,80,0.7)]">CELULARES PROIBIDOS</li>
+            <li className="text-neon-green drop-shadow-[0_0_8px_rgba(0,255,128,0.7)]">CONVIDADO NÃO CONVIDA</li>
           </ul>
         </div>
 
